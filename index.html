@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="每日打车优惠券合集，滴滴/花小猪/高德/T3/同程红包天天可领">
+<title>打车券天天领 · 哪个便宜用哪个</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚕</text></svg>">
+<style>
+:root{
+  --blue:#1b7ff2;
+  --red:#ff4141;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#dbe7f4}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:#222}
+.page{
+  max-width:480px;margin:0 auto;min-height:100vh;
+  background:linear-gradient(180deg,#41a3ff 0%,#1b7ff2 45%,#1263cf 100%);
+  padding:12px 12px 46px;
+  box-shadow:0 0 44px rgba(0,0,0,.22);
+}
+/* 微信内打不开的提示条 */
+.wxbar{display:flex;align-items:center;gap:8px;background:#fff7d6;color:#8a5a00;font-size:12.5px;line-height:1.5;padding:8px 12px;border-radius:10px;margin-bottom:12px}
+.wxbar b{flex:1;font-weight:500}
+.wxbar .x{cursor:pointer;font-size:14px;opacity:.6;padding:2px 6px}
+/* 顶部标语横幅 */
+.banner{border-radius:10px;text-align:center;font-weight:800;letter-spacing:.5px;box-shadow:0 3px 10px rgba(0,50,120,.18)}
+.banner-1{background:#1f8bff;border:2px solid rgba(255,255,255,.7);color:#ffe600;font-size:17px;padding:10px 8px}
+.banner-2{margin-top:10px;background:#1f8bff;border:2px solid rgba(255,255,255,.7);color:#fff;font-size:15.5px;padding:9px 8px;font-weight:600}
+.banner-2 mark{background:#ffe600;color:#111;padding:1px 5px;border-radius:4px;font-weight:800}
+.update{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin:12px 0}
+/* 分组容器 */
+.group{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:14px;padding:10px;margin-bottom:4px}
+.group-head{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:12px}
+.g-1{background:#fff;color:#1b7ff2;font-weight:900;font-size:18px;padding:8px 18px;border-radius:10px;letter-spacing:1px;box-shadow:0 3px 8px rgba(0,40,100,.18)}
+.g-2{background:#ffe600;color:#e63030;font-weight:800;font-size:14px;padding:5px 12px;border-radius:8px}
+/* 优惠券卡片 */
+.card{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:12px;margin-bottom:10px;box-shadow:0 4px 14px rgba(0,60,150,.16);text-decoration:none;color:inherit;animation:up .45s both}
+.card:last-child{margin-bottom:2px}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.logo{flex:none;width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:27px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover;border-radius:13px}
+.info{flex:1;min-width:0}
+.info b{display:block;font-size:15.5px;line-height:1.35;color:#111}
+.info i{display:block;font-style:normal;font-size:12.5px;color:var(--red);margin-top:3px;font-weight:600}
+.right{flex:none;display:flex;flex-direction:column;align-items:center;gap:5px}
+.claim{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(180deg,#ffe94d,#ffce00);color:#222;font-weight:800;font-size:13.5px;padding:8px 13px;border-radius:999px;box-shadow:0 2px 0 rgba(180,120,0,.35);white-space:nowrap;transition:transform .12s}
+.card:active .claim{transform:scale(.94)}
+.copylink{font-size:11px;color:#1b7ff2}
+/* 温馨提示 */
+.tips{background:rgba(255,255,255,.95);border-radius:12px;padding:12px;text-align:center;margin:16px 0;box-shadow:0 4px 14px rgba(0,60,150,.16)}
+.tips-title{color:#ff2d2d;font-weight:900;font-size:16px;letter-spacing:1px;border-bottom:2px solid #ff2d2d;display:inline-block;padding-bottom:2px;margin-bottom:8px}
+.tips-body{font-weight:900;font-size:16.5px;color:#111}
+.tips-body em{color:#ff2d2d;font-style:normal;font-size:20px;padding:0 2px}
+.tips-sub{font-size:11.5px;color:#888;margin-top:6px}
+/* 分区标题 */
+.sec{display:flex;align-items:center;gap:8px;margin:16px 2px 10px;color:#fff;font-weight:900;font-size:16.5px;text-shadow:0 1px 3px rgba(0,40,100,.3)}
+.sec::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,0));border-radius:2px}
+.disclaimer{color:rgba(255,255,255,.75);font-size:11px;line-height:1.7;text-align:center;margin-top:18px;padding:0 6px}
+/* 复制成功提示 */
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.78);color:#fff;font-size:13.5px;padding:9px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:80vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+/* 回到顶部 */
+.top-btn{position:fixed;right:14px;bottom:24px;width:38px;height:38px;border-radius:50%;background:#fff;color:#1b7ff2;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 4px 12px rgba(0,0,0,.25);cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:98}
+.top-btn.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 微信提示（可删） -->
+  <div class="wxbar" id="wxbar">
+    <b>💡 如点击无反应，请点右上角「···」选择「在浏览器打开」</b>
+    <span class="x" onclick="document.getElementById('wxbar').remove()">✕</span>
+  </div>
+
+  <!-- 顶部标语 -->
+  <div class="banner banner-1">哪个便宜用哪个，没用过的最便宜！</div>
+  <div class="banner banner-2">每个地区政策不同，<mark>天天可领！越领越大</mark></div>
+  <div class="update">☁️ 本页优惠今日已更新 · <span id="today"></span></div>
+
+  <!-- 打车券主区 -->
+  <div class="group">
+    <div class="group-head">
+      <div class="g-1">以下是打车券，每天可领</div>
+      <div class="g-2">顺风车 / 代驾 / 租车在网页底下</div>
+    </div>
+    <div id="rideList"></div>
+  </div>
+
+  <!-- 温馨提示 -->
+  <div class="tips">
+    <div class="tips-title">💥 温馨提示：</div>
+    <div class="tips-body">↑ 全部领一遍，哪个<em>大</em>用哪个 ↑</div>
+    <div class="tips-sub">券包金额因城市 / 账号而异，以各平台页面实际展示为准</div>
+  </div>
+
+  <!-- 顺风车 -->
+  <div class="sec">🚙 顺风车优惠券</div>
+  <div class="group"><div id="carpoolList"></div></div>
+
+  <!-- 代驾 / 租车 -->
+  <div class="sec">🚗 代驾 · 租车券</div>
+  <div class="group"><div id="otherList"></div></div>
+
+  <p class="disclaimer">本页面为出行优惠信息聚合分享，所有优惠金额、规则以各平台实际活动页面为准。<br>领取过程请勿向任何人透露短信验证码等隐私信息。</p>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="top-btn" id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+/* =======================================================
+   ✏️  你只需要修改下面的 CONFIG！其他代码都不用动。
+
+   使用方法：
+   1. 打开各平台 App 里的「邀请好友 / 邀请有礼」活动页，
+      生成属于你自己的专属邀请链接（别人通过它领券，
+      你就能拿推广奖励，这就是"拉人头"的正规入口）。
+   2. 把链接完整粘贴到对应条目的 url:"" 引号里。
+   3. name（标题）、desc（红字说明）、icon（emoji 或图片网址）、
+      btn（按钮文字）都可以随意改；想加平台就整行复制一份。
+
+   提示：icon 也可以直接填图片链接，如
+   icon:"https://你的网站/滴浸.png"  （填了就显示图片）
+   ======================================================= */
+const CONFIG = {
+  /* ↓↓↓ 打车券（每天可领）↓↓↓ */
+  rides: [
+    {
+      name: "滴滴打车5折券包",
+      desc: "每天可领100元红包",
+      icon: "🚕",
+      color: "#ff8a3d",
+      url: "",          // ← 把你的滴滴邀请链接粘到这里
+    },
+    {
+      name: "强烈推荐花小猪打车",
+      desc: "每天可领168元红包",
+      icon: "🐷",
+      color: "linear-gradient(135deg,#ff5fa2,#a54cff)",
+      url: "",          // ← 花小猪邀请链接
+    },
+    {
+      name: "高德打车红包",
+      desc: "可领大额红包",
+      icon: "✈️",
+      color: "linear-gradient(135deg,#4facfe,#00c6fb)",
+      url: "",          // ← 高德邀请链接
+    },
+    {
+      name: "T3打车红包",
+      desc: "每天可领100元红包",
+      icon: "🚘",
+      color: "#ff5b3d",
+      url: "",          // ← T3出行邀请链接
+    },
+    {
+      name: "同程打车顺风车红包",
+      desc: "每天可领58元红包",
+      icon: "🚖",
+      color: "linear-gradient(135deg,#2bd67b,#0fb35f)",
+      url: "",          // ← 同程旅行邀请链接
+    },
+  ],
+
+  /* ↓↓↓ 顺风车 ↓↓↓ */
+  carpools: [
+    {
+      name: "滴滴顺风车",
+      desc: "新用户领20元立减券",
+      icon: "🚙",
+      color: "linear-gradient(135deg,#7aa8ff,#4a6cf7)",
+      url: "",
+    },
+    {
+      name: "嘀嗒顺风车",
+      desc: "新人礼包天天领",
+      icon: "🚖",
+      color: "#ffc53d",
+      url: "",
+    },
+    {
+      name: "哈啰顺风车",
+      desc: "领5元立减券包",
+      icon: "🛴",
+      color: "linear-gradient(135deg,#4dc7ff,#1e8fff)",
+      url: "",
+    },
+  ],
+
+  /* ↓↓↓ 代驾 / 租车 ↓↓↓ */
+  others: [
+    {
+      name: "滴滴代驾",
+      desc: "新用户首单立减",
+      icon: "🚗",
+      color: "linear-gradient(135deg,#ffb14d,#ff8a3d)",
+      url: "",
+    },
+    {
+      name: "自驾租车特惠",
+      desc: "首租立减50元",
+      icon: "🚐",
+      color: "linear-gradient(135deg,#b18cff,#7a5cff)",
+      url: "",
+    },
+  ],
+};
+
+/* ============ 以下为渲染与交互代码，无需修改 ============ */
+
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+
+function cardHTML(item, i){
+  const icon = /^https?:/i.test(item.icon)
+    ? `<img src="${esc(item.icon)}" alt="">`
+    : esc(item.icon);
+  const hasUrl = item.url && item.url.trim() && item.url.trim() !== "#";
+  return `
+  <a class="card" href="${hasUrl ? esc(item.url.trim()) : "javascript:void(0)"}"
+     ${hasUrl ? "" : 'data-empty="1"'} data-name="${esc(item.name)}"
+     style="animation-delay:${i * 0.07}s">
+    <span class="logo" style="background:${esc(item.color)}">${icon}</span>
+    <span class="info">
+      <b>${esc(item.name)}</b>
+      <i>${esc(item.desc)}</i>
+    </span>
+    <span class="right">
+      <span class="claim">🎧 ${esc(item.btn || "立即领取")}</span>
+      ${hasUrl ? `<span class="copylink" data-url="${esc(item.url.trim())}">打不开？复制链接</span>` : ""}
+    </span>
+  </a>`;
+}
+
+function render(){
+  document.getElementById("rideList").innerHTML    = CONFIG.rides.map(cardHTML).join("");
+  document.getElementById("carpoolList").innerHTML = CONFIG.carpools.map(cardHTML).join("");
+  document.getElementById("otherList").innerHTML   = CONFIG.others.map(cardHTML).join("");
+  const d = new Date();
+  document.getElementById("today").textContent = `${d.getMonth()+1}月${d.getDate()}日`;
+}
+render();
+
+/* toast 提示 */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+/* 复制链接（兼容微信内置浏览器） */
+function copyText(text){
+  const done = () => toast("✅ 链接已复制，可粘贴到浏览器打开");
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done){
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;opacity:0;top:-999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); }
+  catch(e){ toast("复制失败，请长按链接手动复制"); }
+  document.body.removeChild(ta);
+}
+
+/* 点击处理：未配置的卡片给提示；复制按钮拦截跳转 */
+document.addEventListener("click", e => {
+  const copyBtn = e.target.closest(".copylink");
+  if (copyBtn){
+    e.preventDefault();
+    e.stopPropagation();
+    copyText(copyBtn.dataset.url);
+    return;
+  }
+  const emptyCard = e.target.closest('.card[data-empty="1"]');
+  if (emptyCard){
+    e.preventDefault();
+    toast(`「${emptyCard.dataset.name}」的链接还没配置哦`);
+  }
+});
+
+/* 回到顶部按钮 */
+window.addEventListener("scroll", () => {
+  document.getElementById("topBtn").classList.toggle("show", window.scrollY > 400);
+}, {passive:true});
+</script>
+</body>
+</html>
